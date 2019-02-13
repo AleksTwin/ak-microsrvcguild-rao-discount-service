@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * @author aleksey.kovalenko@accenture.com
  */
-@Entity
+@Entity(name = "Discount")
 public class DiscountDomain {
 
     @Id

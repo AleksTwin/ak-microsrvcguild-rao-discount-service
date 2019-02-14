@@ -2,7 +2,8 @@ package discount.controller;
 
 import java.util.List;
 
-import discount.model.DiscountDTO;
+import discount.model.DiscountDto;
+import discount.model.DiscountsDto;
 import discount.service.DiscountService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +25,8 @@ public class DiscountController {
 
 
     @GetMapping(produces = "application/json")
-    public Discounts getDisocunts(@RequestParam(value = "belowPoints", required = false) Integer belowPoints) {
-        List<DiscountDTO> discountDTOS = belowPoints == null || belowPoints == 0 ? service.getDiscounts() : service.getDiscountsByPointsBelow(belowPoints);
-        return new Discounts(discountDTOS.size(), discountDTOS);
-    }
-
-    private class Discounts {
-        private Integer availableDiscounts;
-        private List<DiscountDTO> discountDTOS;
-
-        Discounts(Integer availableDiscounts, List<DiscountDTO> discountDTOS) {
-            this.availableDiscounts = availableDiscounts;
-            this.discountDTOS = discountDTOS;
-        }
-
-        public Integer getAvailableDiscounts() {
-            return availableDiscounts;
-        }
-
-        public List<DiscountDTO> getDiscountDTOS() {
-            return discountDTOS;
-        }
+    public DiscountsDto getDisocunts(@RequestParam(value = "belowPoints", required = false) Integer belowPoints) {
+        List<DiscountDto> discountDtos = belowPoints == null ? service.getDiscounts() : service.getDiscountsByPointsBelow(belowPoints);
+        return new DiscountsDto(discountDtos.size(), discountDtos);
     }
 }

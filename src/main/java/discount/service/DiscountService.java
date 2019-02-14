@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.google.common.collect.Lists;
-import discount.model.DiscountDTO;
+import discount.model.DiscountDto;
 import discount.repository.DiscountRepository;
 import discount.repository.domain.DiscountDomain;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,22 +43,22 @@ public class DiscountService {
         discountRepository.save(new DiscountDomain("Theater Play 5", 10,20));
     }
 
-    public List<DiscountDTO> getDiscountsByPointsBelow(Integer pointsBelow) {
+    public List<DiscountDto> getDiscountsByPointsBelow(Integer pointsBelow) {
         return mapQueryResult(discountRepository.findAllByPointsBelowLowest10(pointsBelow));
     }
 
-    public List<DiscountDTO> getDiscounts() {
+    public List<DiscountDto> getDiscounts() {
         return mapQueryResult(Optional.of(discountRepository.findAll()).get());
     }
 
-    private List<DiscountDTO> mapQueryResult(Iterable<DiscountDomain> queryResult) {
-        ArrayList<DiscountDTO> arrayList = Lists.newArrayList();
+    private static List<DiscountDto> mapQueryResult(Iterable<DiscountDomain> queryResult) {
+        ArrayList<DiscountDto> arrayList = Lists.newArrayList();
         queryResult.forEach((domain -> {
-            DiscountDTO discountDTO = new DiscountDTO();
-            discountDTO.setPlay(domain.getPlay());
-            discountDTO.setDiscount(domain.getDiscount());
-            discountDTO.setPoints(domain.getPoints());
-            arrayList.add(discountDTO);
+            DiscountDto discountDto = new DiscountDto();
+            discountDto.setPlay(domain.getPlay());
+            discountDto.setDiscount(domain.getDiscount());
+            discountDto.setPoints(domain.getPoints());
+            arrayList.add(discountDto);
         }));
 
         return arrayList;

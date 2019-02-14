@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
  * @author aleksey.kovalenko@accenture.com
  */
 @ApiModel
-public class DiscountDTO {
+public class DiscountDto {
 
     private String play;
     private Integer discount;
